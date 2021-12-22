@@ -173,39 +173,6 @@
 }
 
 
-
-<#
-[string]$urlBase = 'http://10.0.2.135:8000/api'
-
-[string]$contentT = 'application/json'
-$h = @{Accept='application/json'; indent='4'}
-
-[string[]]$body = @{username='admin'; password='wri34te10'} | ConvertTo-Json -Depth 1 -Compress
-
-$url = "$($urlBase)/users/tokens/provision/"
-$response = Invoke-RestMethod -Headers $h -Method Post -ContentType $contentT -uri $url -body $body
-
-$clave = $response.key
-
-#>
-
-
-#$f = [NetBoxAPI]::new('http://10.0.2.135:8000')
-#$f.GetToken('admin','wri34te10')
-
-<#
-$credential = New-Object System.Management.Automation.PSCredential($user, $secpasswd)
-$credential = Get-Credential
-
-$credential | Export-CliXml -Path 'C:\My\Path\cred.xml'
-
-To re-import:
-
-$credential = Import-CliXml -Path 'C:\My\Path\cred.xml'
-#>
-
-#$f = [NetBoxAPI]::new('http://10.0.2.135:8000', 'admin', 'wri34te10')
-
 try {
     $credential = Import-Clixml -Path '.\credNetBox.cred'
     $f = [NetBoxAPI]::new('http://10.0.2.135:8000', [ref]$credential)
